@@ -29,8 +29,7 @@ object MyList {
 How to build
 ------------
 * Clone this repository
-* Run `./sbt publishM2` in the project folder to build the project and install it to the local 
-Maven repository
+* Run `./sbt publishLocal` in the project folder to build the project and install it to the local repository
 
 How to use
 ----------
