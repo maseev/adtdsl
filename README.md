@@ -3,7 +3,7 @@ ADT DSL
 [![Build Status](https://travis-ci.org/maseev/adtdsl.svg?branch=master)](https://travis-ci.org/maseev/adtdsl)
 [![GitHub](https://img.shields.io/github/license/maseev/adtdsl.svg)](https://github.com/maseev/adtdsl/blob/master/LICENSE)
 
-DSL for you ADTs
+DSL for your ADTs
 -------------------------------------------------------------------------------------------
 `adtdsl` lets yout define your ADTs using the concise syntax of an internal DSL. 
 Here's a little example of what you can do with it:
