@@ -1,7 +1,5 @@
 package com.adtdsl
 
-import com.adtdsl.model.{Adt, ClassType, DownType, ObjectType, Parameter, ParameterType, PrimitiveType, ReferenceType, RootType}
-
 import scala.util.parsing.combinator._
 
 class AdtParser extends JavaTokenParsers {

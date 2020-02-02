@@ -44,7 +44,7 @@ libraryDependencies += "io.github.maseev" % "adtdsl" % "0.1"
 ##### API
 
 ```scala
-import com.adtdsl.CodeGenerator
+import com.adtdsl.AdtGenerator._
 
 val input =
   """
@@ -54,5 +54,5 @@ val input =
     |}
     |""".stripMargin
 
-val scalaCode = CodeGenerator.generate(input)
+val scalaCode = generate(input)
 ```

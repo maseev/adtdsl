@@ -1,10 +1,12 @@
 package com.adtdsl
 
-import org.scalatest.FunSuite
+import com.adtdsl.AdtGenerator._
+import org.scalatest.TryValues._
+import org.scalatest.{FunSuite, Matchers}
 
-import CodeGenerator._
+import scala.util.Try
 
-class AdtParserGeneratorTest extends FunSuite {
+class AdtParserGeneratorTest extends FunSuite with Matchers {
 
   test("duplicate types are not allowed") {
     val input =
@@ -15,7 +17,7 @@ class AdtParserGeneratorTest extends FunSuite {
         |}
         |""".stripMargin
 
-    assertThrows[IllegalArgumentException](generate(input))
+    assertFailure(generate(input), classOf[IllegalArgumentException])
   }
 
   test("duplicate parameter names are not allowed") {
@@ -26,7 +28,7 @@ class AdtParserGeneratorTest extends FunSuite {
         |}
         |""".stripMargin
 
-    assertThrows[IllegalArgumentException](generate(input))
+    assertFailure(generate(input), classOf[IllegalArgumentException])
   }
 
   test("unknown parameter types are not allowed") {
@@ -37,7 +39,7 @@ class AdtParserGeneratorTest extends FunSuite {
         |}
         |""".stripMargin
 
-    assertThrows[IllegalArgumentException](generate(input))
+    assertFailure(generate(input), classOf[IllegalArgumentException])
   }
 
   test("forward reference should be allowed") {
@@ -58,7 +60,7 @@ class AdtParserGeneratorTest extends FunSuite {
         |}
         |""".stripMargin
 
-    assertResult(expectedCode)(generate(input))
+    generate(input).success.value shouldBe expectedCode
   }
 
   test("fully-compliant adt description should generate the valid Scala code") {
@@ -79,6 +81,10 @@ class AdtParserGeneratorTest extends FunSuite {
         |}
         |""".stripMargin
 
-    assertResult(expectedCode)(generate(input))
+    generate(input).success.value shouldBe expectedCode
+  }
+
+  private def assertFailure[T](tryValue: Try[T], clazz: Class[_ <: Throwable]): Unit = {
+    tryValue.failure.exception.getClass shouldBe clazz
   }
 }
